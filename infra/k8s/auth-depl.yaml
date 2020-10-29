@@ -14,6 +14,7 @@ spec:
         spec:
             containers:
                 - name: auth
+                #   image: eu.gcr.io/ticketing-dev-293912/auth
                   image: masodano/auth
 ---
 apiVersion: v1

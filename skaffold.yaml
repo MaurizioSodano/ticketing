@@ -1,3 +1,4 @@
+
 apiVersion: skaffold/v2alpha3
 kind: Config
 deploy: 
@@ -7,7 +8,11 @@ deploy:
 build:
   local:
     push: false
+  # googleCloudBuild:
+  #   projectId: ticketing-dev-293912
+   
   artifacts:
+    #   - image: eu.gcr.io/ticketing-dev-293912/auth
     - image: masodano/auth
       context: auth
       docker:
