@@ -1,10 +1,11 @@
 import express from "express";
 
-const router=express.Router();
+const router = express.Router();
 
-router.post("/api/users/signout", (req,res)=>{
-    res.send("Hi there! from current user");
+router.post("/api/users/signout", (req, res) => {
+    req.session = null; // destroying the session to remove the cookie
+    res.send({});
 });
 
 
-export {router as signoutRouter};
+export { router as signoutRouter };
