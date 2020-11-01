@@ -1,10 +1,30 @@
-import express from "express";
+import express, { Request, Response } from "express";
+import { body, validationResult } from "express-validator";
 
-const router=express.Router();
+import { RequestValidationError } from "../errors/request-validation-error";
 
-router.post("/api/users/signin", (req,res)=>{
+import jwt from "jsonwebtoken";
+
+const router = express.Router();
+
+router.post("/api/users/signin", [
+    body('email')
+        .isEmail()
+        .withMessage("Email must be vaild"),
+    body("password")
+        .trim()
+        .notEmpty()
+        .withMessage("You must supply a password")
+], (req: Request, res: Response) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        throw new RequestValidationError(errors.array());
+    }
+
+
     res.send("sign in current user");
 });
 
 
-export {router as signinRouter};
+export { router as signinRouter };
