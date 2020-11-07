@@ -1,12 +1,12 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 
-import {User} from "../models/user"
+import { User } from "../models/user"
 
-import { validateRequest } from "../middlewares/validate-request";
-import { BadRequestError } from "../errors/bad-request-error";
+import { validateRequest, BadRequestError } from "@msticketingudemy/common";
 
-import {Password} from "../services/password";
+
+import { Password } from "../services/password";
 
 import jwt from "jsonwebtoken";
 
@@ -23,7 +23,7 @@ router.post("/api/users/signin", [
 ],
     validateRequest,
     async (req: Request, res: Response) => {
-        const {email,password}=req.body;
+        const { email, password } = req.body;
         console.log(`signin user validated ${email}`)
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
@@ -31,13 +31,13 @@ router.post("/api/users/signin", [
             throw new BadRequestError('Invalid credentials');
         }
 
-        const passwordsMatch= await Password.compare(existingUser.password,password);
-        if (!passwordsMatch){
-             console.log('Invalid credentials');
+        const passwordsMatch = await Password.compare(existingUser.password, password);
+        if (!passwordsMatch) {
+            console.log('Invalid credentials');
             throw new BadRequestError('Invalid credentials');
         };
 
-        
+
         //generate JWT
 
         const userJwt = jwt.sign({
