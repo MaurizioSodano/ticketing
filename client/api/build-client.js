@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default ({ req }) => {
+const BuildClient= ({ req }) => {
   if (typeof window === "undefined") {
     //we are on the server
     //requests should be made to http://ingress-nginx.ingress-nginx.svc.cluster.local
@@ -17,3 +17,5 @@ export default ({ req }) => {
     });
   }
 };
+
+export default BuildClient;

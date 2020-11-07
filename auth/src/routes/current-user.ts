@@ -9,5 +9,4 @@ router.get("/api/users/currentuser", currentUser, (req, res) => {
 
 });
 
-
 export { router as currentUserRouter };

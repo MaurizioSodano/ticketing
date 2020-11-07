@@ -24,14 +24,16 @@ router.post("/api/users/signin", [
     validateRequest,
     async (req: Request, res: Response) => {
         const {email,password}=req.body;
-
+        console.log(`signin user validated ${email}`)
         const existingUser = await User.findOne({ email });
         if (!existingUser) {
+            console.log('Invalid credentials');
             throw new BadRequestError('Invalid credentials');
         }
 
         const passwordsMatch= await Password.compare(existingUser.password,password);
         if (!passwordsMatch){
+             console.log('Invalid credentials');
             throw new BadRequestError('Invalid credentials');
         };
 
