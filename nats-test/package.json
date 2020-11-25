@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@msticketingudemy/common": "^1.0.5",
     "@types/node": "^14.14.9",
     "node-nats-streaming": "^0.3.2",
     "ts-node-dev": "^1.0.0",
