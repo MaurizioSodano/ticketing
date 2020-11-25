@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@msticketingudemy/common": "^1.0.4",
+    "@msticketingudemy/common": "^1.0.5",
     "@types/bcrypt": "^3.0.0",
     "@types/cookie-session": "^2.0.41",
     "@types/express": "^4.17.9",
