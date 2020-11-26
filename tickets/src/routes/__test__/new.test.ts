@@ -3,6 +3,7 @@ import { app } from "../../app";
 import { Ticket } from "../../models/ticket";
 
 
+
 it("has a route handler lintening to /api/tickets for post request",
     async () => {
         const response = await request(app)
@@ -71,8 +72,8 @@ it("creates a ticket with the valid inputs",
 
         expect(tickets.length).toEqual(0);
 
-        const title="hyhj";
-        const price=20;
+        const title = "hyhj";
+        const price = 20;
         await request(app)
             .post("/api/tickets")
             .set("Cookie", global.signin())
@@ -82,7 +83,7 @@ it("creates a ticket with the valid inputs",
             })
             .expect(201);
         tickets = await Ticket.find({});
-       
+
         expect(tickets.length).toEqual(1);
         expect(tickets[0].price).toEqual(price);
         expect(tickets[0].title).toEqual(title);
