@@ -3,6 +3,7 @@ import { Order, OrderStatus } from "./order"
 
 // interface for constructor parameters
 interface TicketAttrs {
+    id: string;
     title: string;
     price: number;
 
@@ -46,7 +47,11 @@ const ticketSchema = new mongoose.Schema({
 
 // adding custom function 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
-    return new Ticket(attrs);
+    return new Ticket({
+        _id: attrs.id,
+        title: attrs.title,
+        price: attrs.price
+    });
 };
 
 
