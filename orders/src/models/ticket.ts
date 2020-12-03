@@ -20,6 +20,7 @@ export interface TicketDoc extends mongoose.Document {
 //an interface that describes the properties that a User Model has
 interface TicketModel extends mongoose.Model<TicketDoc> {
     build(attrs: TicketAttrs): TicketDoc;
+    findByEvent(event: { id: string, version: number }): Promise<TicketDoc | null>;
 }
 
 
@@ -62,7 +63,13 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
     });
 };
 
-
+ticketSchema.statics.findByEvent = (event: { id: string, version: number }) => {
+    const { id, version } = event;
+    return Ticket.findOne({
+        _id: id,
+        version: version - 1
+    });
+};
 // run query to look all orders. Find an order where the ticket
 // is the ticket we just found *and* the order status is *not* cancelled.
 // If we find an order from that it means that the ticket *is* reserved
