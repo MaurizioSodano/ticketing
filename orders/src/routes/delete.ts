@@ -25,6 +25,7 @@ router.delete(`/api/orders/:orderId`, requireAuth,
 
         await new OrderCreatedPublisher(natsWrapper.client).publish({
             id: order.id,
+            version: order.version,
             ticket: {
                 id: order.ticket.id
             }

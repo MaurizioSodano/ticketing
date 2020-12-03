@@ -13,6 +13,7 @@ interface TicketAttrs {
 export interface TicketDoc extends mongoose.Document {
     title: string;
     price: number;
+    version: number;
     isReserved(): Promise<boolean>;
 
 }
@@ -22,7 +23,11 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 }
 
 
-
+declare module "mongoose" {
+    interface SchemaOptions {
+        optimisticConcurrency?: boolean;
+    }
+}
 
 const ticketSchema = new mongoose.Schema({
     title: {
@@ -36,14 +41,17 @@ const ticketSchema = new mongoose.Schema({
     },
 
 }, {
+    optimisticConcurrency: true,
+    versionKey: "version",
     toJSON: {
         transform(doc, ret) {
             ret.id = ret._id;
             delete ret._id;
-            delete ret.__v;
         }
     }
 })
+
+
 
 // adding custom function 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
@@ -59,7 +67,7 @@ ticketSchema.statics.build = (attrs: TicketAttrs) => {
 // is the ticket we just found *and* the order status is *not* cancelled.
 // If we find an order from that it means that the ticket *is* reserved
 ticketSchema.methods.isReserved = async function () {
-    const exixtingOrder = await Order.findOne({
+    const existingOrder = await Order.findOne({
         ticket: this,
         status: {
             $in: [
@@ -70,8 +78,9 @@ ticketSchema.methods.isReserved = async function () {
         }
     }).exec();
 
-    return !!exixtingOrder;
-}
+    return !!existingOrder;
+};
+
 const Ticket = mongoose.model<TicketDoc, TicketModel>("Ticket", ticketSchema);
 
 

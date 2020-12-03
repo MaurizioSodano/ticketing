@@ -5,6 +5,7 @@ export interface OrderCancelledEvent {
 
     data: {
         id: string;
+        version: number;
         ticket: {
             id: string;
         }
