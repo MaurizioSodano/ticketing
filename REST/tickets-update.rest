@@ -1,0 +1,7 @@
+PUT https://ticketing.dev/api/tickets/5fc922e058ab3c0018ebabe6 HTTP/1.1
+content-type: application/json
+
+{
+    "title":"concert   Update 3",
+    "price":35000
+}

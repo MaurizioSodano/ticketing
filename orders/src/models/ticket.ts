@@ -42,7 +42,7 @@ const ticketSchema = new mongoose.Schema({
     },
 
 }, {
-    optimisticConcurrency: true,
+   
     versionKey: "version",
     toJSON: {
         transform(doc, ret) {
@@ -52,7 +52,15 @@ const ticketSchema = new mongoose.Schema({
     }
 })
 
+ticketSchema.pre("save", function(done){
+    //@ts-ignore
+    this.$where={
+        version: this.get("version")-1
+    };
 
+    done();
+
+})
 
 // adding custom function 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
