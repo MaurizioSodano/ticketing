@@ -18,7 +18,7 @@ router.put(`/api/tickets/:id`, requireAuth,
     ],
     validateRequest,
     async (req: Request, res: Response) => {
-        const ticket = await Ticket.findById(req.params.id);
+        const ticket = await Ticket.findById(req.params.id).exec();
 
         if (!ticket) {
             throw new NotFoundError();
@@ -38,6 +38,7 @@ router.put(`/api/tickets/:id`, requireAuth,
             title: ticket.title,
             price: ticket.price,
             userId: ticket.userId,
+            version: ticket.version
         })
         res.send(ticket);
 

@@ -4,7 +4,7 @@ import { Ticket } from "../../models/ticket";
 
 import { Order, OrderStatus } from "../../models/order";
 import { natsWrapper } from "../../nats-wrapper"
-
+import mongoose from "mongoose";
 
 it("can only be deleted if the user is signed in",
     async () => {
@@ -18,6 +18,7 @@ it("can only be deleted if the user is signed in",
 it("returns an error if a user tries to delete another users order", async () => {
     // Create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 10,
     });
@@ -49,6 +50,7 @@ it("marks an order as cancelled",
 
         // Create a ticket
         const ticket = Ticket.build({
+            id: new mongoose.Types.ObjectId().toHexString(),
             title: "concert",
             price: 10,
         });
@@ -83,6 +85,7 @@ it("emits an order cancelled event", async () => {
 
     // Create a ticket
     const ticket = Ticket.build({
+        id: new mongoose.Types.ObjectId().toHexString(),
         title: "concert",
         price: 10,
     });

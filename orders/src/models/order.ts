@@ -18,6 +18,7 @@ interface OrderDoc extends mongoose.Document {
     status: OrderStatus;
     expiresAt: Date;
     ticket: TicketDoc;
+    version: number;
 
 }
 //an interface that describes the properties that a User Model has
@@ -26,12 +27,16 @@ interface OrderModel extends mongoose.Model<OrderDoc> {
 }
 
 
-
+declare module "mongoose" {
+    interface SchemaOptions {
+        optimisticConcurrency?: boolean;
+    }
+}
 
 const orderSchema = new mongoose.Schema({
     userId: {
         type: String,
-        requred: true
+        required: true,
     },
     status: {
         type: String,
@@ -49,11 +54,12 @@ const orderSchema = new mongoose.Schema({
     }
 
 }, {
+    optimisticConcurrency: true,
+    versionKey: "version",
     toJSON: {
         transform(doc, ret) {
             ret.id = ret._id;
             delete ret._id;
-            delete ret.__v;
         }
     }
 })

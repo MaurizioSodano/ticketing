@@ -13,6 +13,7 @@ interface TicketDoc extends mongoose.Document {
     title: string;
     price: number;
     userId: string;
+    version: number;
 
 }
 //an interface that describes the properties that a User Model has
@@ -22,6 +23,11 @@ interface TicketModel extends mongoose.Model<TicketDoc> {
 
 
 
+declare module "mongoose" {
+    interface SchemaOptions {
+        optimisticConcurrency?: boolean;
+    }
+}
 
 const ticketSchema = new mongoose.Schema({
     title: {
@@ -34,9 +40,11 @@ const ticketSchema = new mongoose.Schema({
     },
     userId: {
         type: String,
-        requred: true
+        required: true
     }
 }, {
+    optimisticConcurrency: true,
+    versionKey: "version",
     toJSON: {
         transform(doc, ret) {
             ret.id = ret._id;
@@ -45,6 +53,7 @@ const ticketSchema = new mongoose.Schema({
         }
     }
 })
+
 
 // adding custom function 
 ticketSchema.statics.build = (attrs: TicketAttrs) => {
