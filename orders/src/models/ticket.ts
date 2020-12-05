@@ -42,7 +42,7 @@ const ticketSchema = new mongoose.Schema({
     },
 
 }, {
-   
+
     versionKey: "version",
     toJSON: {
         transform(doc, ret) {
@@ -52,13 +52,13 @@ const ticketSchema = new mongoose.Schema({
     }
 })
 
-ticketSchema.pre("save", function(done){
+ticketSchema.pre("save", function (next) {
     //@ts-ignore
-    this.$where={
-        version: this.get("version")-1
+    this.$where = {
+        version: this.get("version") - 1
     };
-
-    done();
+    //@ts-ignore
+    next();
 
 })
 
