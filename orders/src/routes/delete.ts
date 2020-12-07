@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { Order, OrderStatus } from "../models/order"
 import { NotAuthorizedError, NotFoundError, requireAuth } from "@msticketingudemy/common";
-import { OrderCreatedPublisher } from "../events/publishers/order-cancelled-publisher";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import { natsWrapper } from "../nats-wrapper"
 
 const router = express.Router();
@@ -18,12 +18,12 @@ router.delete(`/api/orders/:orderId`, requireAuth,
         if (order.userId !== req.currentUser!.id) {
             throw new NotAuthorizedError();
         }
-        order.status = OrderStatus.Cancelled;
+        order.set({ status: OrderStatus.Cancelled });
         await order.save();
 
         // publish cancellation event
 
-        await new OrderCreatedPublisher(natsWrapper.client).publish({
+        await new OrderCancelledPublisher(natsWrapper.client).publish({
             id: order.id,
             version: order.version,
             ticket: {

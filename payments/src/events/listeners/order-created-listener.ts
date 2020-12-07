@@ -9,6 +9,7 @@ export class OrderCreatedListener extends Listener<OrderCreatedEvent>{
     readonly queueGroupName = queueGroupName;
     async onMessage(data: OrderCreatedEvent["data"], msg: Message) {
         // Find the ticket that the order is reserving
+        
         const order = Order.build({
             id: data.id,
             status: data.status,

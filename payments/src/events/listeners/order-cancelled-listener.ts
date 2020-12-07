@@ -9,7 +9,7 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent>{
     readonly queueGroupName = queueGroupName;
     async onMessage(data: OrderCancelledEvent["data"], msg: Message) {
         // Find the ticket that the order is reserving
-        console.log("looking for order.version:",data.version )
+
         const order = await Order.findByEvent({ id: data.id, version: data.version });
 
         if (!order) {

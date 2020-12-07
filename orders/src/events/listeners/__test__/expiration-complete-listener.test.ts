@@ -18,7 +18,7 @@ const setup = async () => {
         price: 10,
         title: "concert"
     })
-
+    await ticket.save();
     const order = Order.build({
         status: OrderStatus.Created,
         userId: "fdsfd",
@@ -28,6 +28,7 @@ const setup = async () => {
 
     await order.save();
 
+  
 
     // create a fake data event
     const data: ExpirationCompleteEvent["data"] = {

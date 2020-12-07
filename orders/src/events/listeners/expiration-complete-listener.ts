@@ -1,17 +1,18 @@
-import { Message } from "node-nats-streaming";
 import { Subjects, Listener, ExpirationCompleteEvent, NotFoundError, OrderStatus } from "@msticketingudemy/common";
-import { Order } from "../../models/order";
+import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
-import { OrderCreatedPublisher } from "../publishers/order-cancelled-publisher";
+import { Order } from "../../models/order";
+import { OrderCancelledPublisher } from "../publishers/order-cancelled-publisher";
 
 export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent>{
-    readonly subject = Subjects.ExpirationComplete;
     queueGroupName = queueGroupName;
+    readonly subject = Subjects.ExpirationComplete;
+
 
     async onMessage(data: ExpirationCompleteEvent["data"], msg: Message) {
         const { orderId } = data;
-        const order = await Order.findById(orderId).populate("Ticket").exec();
-
+        const order = await Order.findById(orderId).populate("ticket").exec();
+       
         if (!order) {
             throw new NotFoundError();
         }
@@ -20,18 +21,21 @@ export class ExpirationCompleteListener extends Listener<ExpirationCompleteEvent
             return msg.ack();
         }
 
-        order.status = OrderStatus.Cancelled;
+        order.set({ status: OrderStatus.Cancelled });
 
         await order.save();
 
 
-        await new OrderCreatedPublisher(this.client).publish({
+        const orderCancelledData = {
             id: order.id,
             version: order.version,
             ticket: {
-                id: order.ticket.id
+                id: order.ticket.id,
             }
-        })
+        };
+
+
+        await new OrderCancelledPublisher(this.client).publish(orderCancelledData)
 
         msg.ack();
     }
