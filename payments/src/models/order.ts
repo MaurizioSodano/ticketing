@@ -23,6 +23,7 @@ interface OrderDoc extends mongoose.Document {
 //an interface that describes the properties that a User Model has
 interface OrderModel extends mongoose.Model<OrderDoc> {
     build(attrs: OrderAttrs): OrderDoc;
+    findByEvent(event: { id: string, version: number }): Promise<OrderDoc | null>;
 }
 
 
@@ -73,6 +74,14 @@ orderSchema.statics.build = (attrs: OrderAttrs) => {
     });
 };
 
+
+orderSchema.statics.findByEvent = (event: { id: string, version: number }) => {
+    const { id, version } = event;
+    return Order.findOne({
+        _id: id,
+        version: version - 1
+    });
+};
 const Order = mongoose.model<OrderDoc, OrderModel>("Order", orderSchema);
 
 
