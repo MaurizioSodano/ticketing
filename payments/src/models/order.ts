@@ -33,17 +33,14 @@ declare module "mongoose" {
 }
 
 const orderSchema = new mongoose.Schema({
-    id: {
+
+    userId: {
         type: String,
-        required: true
+        required: true,
     },
     price: {
         type: Number,
         required: true
-    },
-    userId: {
-        type: String,
-        required: true,
     },
     status: {
         type: String,
