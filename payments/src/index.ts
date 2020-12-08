@@ -5,6 +5,7 @@ import { natsWrapper } from "./nats-wrapper"
 import { OrderCreatedListener } from "./events/listeners/order-created-listener";
 import { OrderCancelledListener } from "./events/listeners/order-cancelled-listener";
 
+
 const start = async () => {
 
     if (!process.env.JWT_KEY) {
