@@ -1,0 +1,2 @@
+process.env.TEST_ENV="TEST";
+process.env.STRIPE_KEY="sk_test_51HwMukGs6EkJCCd4Pk8a0nAYU9PjVe8KwuUj3ZA2LLFMooybjJZjHesJfvqjI85yKv0fCCWnyGULBPWxRJuyBd8G00rz5M7onN";

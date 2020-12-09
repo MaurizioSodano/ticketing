@@ -1,0 +1,6 @@
+DELETE  https://ticketing.dev/api/orders/5fce697ec26e57002e0db4e2 HTTP/1.1
+content-type: application/json
+
+{
+    
+}
