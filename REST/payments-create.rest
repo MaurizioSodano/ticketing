@@ -2,6 +2,6 @@ POST https://ticketing.dev/api/payments HTTP/1.1
 content-type: application/json
 
 {
-    "token":"fdggdg",
-    "orderId":"fdfsdfsfd"
+   "orderId":"5fd0a2b771105e00191bd0e3",
+   "token":"tok_visa"
 }
