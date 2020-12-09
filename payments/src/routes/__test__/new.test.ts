@@ -3,6 +3,7 @@ import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order, OrderStatus } from "../../models/order";
 import { stripe } from "../../stripe";
+import { Payment } from "../../models/payment"
 
 jest.mock("../../stripe");
 
@@ -49,7 +50,7 @@ it("returns a 400 when the order has been cancelled", async () => {
         price: 20,
         status: OrderStatus.Cancelled,
         version: 0,
-        userId: userId
+        userId
     })
     await order.save();
     await request(app)
@@ -63,16 +64,17 @@ it("returns a 400 when the order has been cancelled", async () => {
 
 })
 
-it("returns a 204 with avalid inputs", async () => {
+it("returns a 201 with valid inputs", async () => {
     const userId = mongoose.Types.ObjectId().toHexString();
     const order = Order.build({
         id: mongoose.Types.ObjectId().toHexString(),
+        userId,
+        version: 0,
         price: 20,
         status: OrderStatus.Created,
-        version: 0,
-        userId: userId
     })
     await order.save();
+
     await request(app)
         .post("/api/payments")
         .set("Cookie", global.signin(userId))
@@ -82,9 +84,24 @@ it("returns a 204 with avalid inputs", async () => {
         })
         .expect(201);
 
-    const chargeOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
-    expect(chargeOptions.source).toEqual("tok_visa");
-    expect(chargeOptions.amount).toEqual(order.price * 100);
-    expect(chargeOptions.currency).toEqual("eur");
+    
+    const chargedOptions = (stripe.charges.create as jest.Mock).mock.calls[0][0];
+   
+    expect(chargedOptions.source).toEqual('tok_visa');
+    expect(chargedOptions.amount).toEqual(order.price * 100);
+    expect(chargedOptions.currency).toEqual('eur');
 
+
+    const chargeResult = await (stripe.charges.create as jest.Mock).mock
+        .results[0].value;
+
+
+    const payment = await Payment.findOne({
+        orderId: order.id,
+        stripeId: chargeResult.id,
+    }).exec();
+
+    expect(payment).not.toBeNull();
+    expect(payment!.orderId).toEqual(order.id);
+    expect(payment!.stripeId).toEqual(chargeResult.id);
 })

@@ -1,8 +1,10 @@
-import request from "supertest";
+/* import request from "supertest";
 import { app } from "../../app";
 import mongoose from "mongoose";
 import { Order, OrderStatus } from "../../models/order";
 import { stripe } from "../../stripe";
+import { Payment } from "../../models/payment"
+
 
 //jest.mock("../../stripe");
 
@@ -36,4 +38,16 @@ it("returns a 204 with avalid inputs", async () => {
     expect(stripeCharge).toBeDefined();
     expect(stripeCharge!.amount).toEqual(price * 100);
     expect(stripeCharge!.currency).toEqual("eur");
-})
+
+    const payment = await Payment.findOne({
+        orderId: order.id,
+        stripeId: stripeCharge!.id
+    }).exec();
+
+    expect(payment).not.toBeNull();
+});
+ */
+
+ it(" Comment new.test.ts and rename __mocks__/stripe.ts",()=>{
+
+ })
