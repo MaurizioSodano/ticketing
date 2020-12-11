@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
-import { body } from "express-validator";
-import { NotFoundError, requireAuth, validateRequest } from "@msticketingudemy/common";
+import { NotFoundError } from "@msticketingudemy/common";
 import { Ticket } from "../models/ticket";
 
 
@@ -8,8 +7,9 @@ import { Ticket } from "../models/ticket";
 const router = express.Router();
 
 
-router.get("/api/tickets/:id", async (req:Request, res:Response)=>{
-    const ticket=await Ticket.findById(req.params.id).exec();
+router.get("/api/tickets/:id", async (req: Request, res: Response) => {
+    console.log("requesting ticket", req.params.id)
+    const ticket = await Ticket.findById(req.params.id).exec();
     if (!ticket) {
         throw new NotFoundError();
     }
@@ -18,4 +18,4 @@ router.get("/api/tickets/:id", async (req:Request, res:Response)=>{
 
 })
 
-export {router as showTicketRouter} ;
+export { router as showTicketRouter };

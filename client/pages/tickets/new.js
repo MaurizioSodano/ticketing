@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import useRequest from '../../hooks/use-request';
+import Router from 'next/router';
 
 const NewTicket = () => {
   const [title, setTitle] = useState('');
@@ -10,10 +12,27 @@ const NewTicket = () => {
     }
     setPrice(value.toFixed(2));
   };
+
+  const { doRequest, errors } = useRequest({
+    url: '/api/tickets',
+    method: 'post',
+    body: {
+      title,
+      price,
+    },
+    onSuccess: () => Router.push('/'),
+
+  });
+  const onSubmit = async (event) => {
+    event.preventDefault();
+
+    await doRequest();
+  };
+
   return (
     <div>
       <h1>Create a Ticket</h1>
-      <form>
+      <form onSubmit={onSubmit}>
         <div className='form-group'>
           <label>Title</label>
           <input
@@ -35,7 +54,8 @@ const NewTicket = () => {
             }}
           />
         </div>
-        <button ckassName='btn btn-primary'>Submit</button>
+        {errors}
+        <button className='btn btn-primary'>Submit</button>
       </form>
     </div>
   );
