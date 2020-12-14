@@ -1,4 +1,5 @@
 import useRequest from '../../hooks/use-request';
+import Router from 'next/router';
 
 const TicketShow = ({ ticket }) => {
   const { doRequest, errors } = useRequest({
@@ -7,7 +8,7 @@ const TicketShow = ({ ticket }) => {
     body: {
       ticketId: ticket.id,
     },
-    onSuccess: (order) => console.log(order),
+    onSuccess: (order) => Router.push('/orders/[orderid]', `/orders/${order.id}`),
   });
 
   return (
@@ -24,7 +25,7 @@ const TicketShow = ({ ticket }) => {
 
 TicketShow.getInitialProps = async (context, client) => {
   const { ticketid } = context.query; //comes from [ticketId]
- 
+
   const { data } = await client.get(`/api/tickets/${ticketid}`);
   return { ticket: data };
 };
