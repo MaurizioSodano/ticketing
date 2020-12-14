@@ -8,7 +8,8 @@ const TicketShow = ({ ticket }) => {
     body: {
       ticketId: ticket.id,
     },
-    onSuccess: (order) => Router.push('/orders/[orderid]', `/orders/${order.id}`),
+    onSuccess: (order) =>
+      Router.push('/orders/[orderid]', `/orders/${order.id}`),
   });
 
   return (
@@ -16,7 +17,7 @@ const TicketShow = ({ ticket }) => {
       <h1>{ticket.title}</h1>
       <h4>Price: {ticket.price}</h4>
       {errors}
-      <button onClick={doRequest} className='btn btn-primary'>
+      <button onClick={() => doRequest()} className='btn btn-primary'>
         Purchase
       </button>
     </div>
