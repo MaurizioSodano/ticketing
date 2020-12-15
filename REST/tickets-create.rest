@@ -1,0 +1,7 @@
+POST https://ticketing.dev/api/tickets HTTP/1.1
+content-type: application/json
+
+{
+    "title":"concert 333",
+    "price":333
+}
