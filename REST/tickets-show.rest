@@ -1,0 +1,6 @@
+GET https://ticketing.dev/api/tickets/5fd74c800bc82d0018a176ba HTTP/1.1
+content-type: application/json
+
+{
+
+}

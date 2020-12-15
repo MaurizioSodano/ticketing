@@ -53,8 +53,8 @@ router.post("/api/payments", requireAuth, [
 
         await new PaymentCreatedPublisher(natsWrapper.client).publish({
             id: payment.id,
-            orderId: payment.id,
-            stripeId: payment.stripeId
+            orderId: payment.orderId,
+            stripeId: payment.stripeId,
         });
         res.status(201).send({ id: payment.id });
     }
