@@ -24,14 +24,15 @@ router.delete(`/api/orders/:orderId`, requireAuth,
         // publish cancellation event
 
         await new OrderCancelledPublisher(natsWrapper.client).publish({
+            //@ts-ignore
             id: order.id,
             version: order.version,
             ticket: {
+                //@ts-ignore
                 id: order.ticket.id
             }
         })
         res.status(204).send(order);
-
 
     })
 
