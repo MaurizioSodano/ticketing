@@ -24,13 +24,12 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent>{
         try {
             await ticket.save();
             await new TicketUpdatedPublisher(this.client).publish({
-                id: ticket.id,
+                id: (ticket.id as string),
                 price: ticket.price,
                 title: ticket.title,
                 userId: ticket.userId,
                 version: ticket.version,
                 orderId: ticket.orderId,
-
             });
         } catch (error) {
             throw new Error("Ticket out of version");
@@ -40,6 +39,4 @@ export class OrderCancelledListener extends Listener<OrderCancelledEvent>{
         // ack the message
         msg.ack();
     }
-
-
 }
