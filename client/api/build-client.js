@@ -1,11 +1,13 @@
 import axios from "axios";
 
 const BuildClient= ({ req }) => {
+ 
   if (typeof window === "undefined") {
     //we are on the server
-    //requests should be made to http://ingress-nginx.ingress-nginx.svc.cluster.local
+    //requests should be made to http://ingress-nginx-controller.ingress-nginx.svc.cluster.local
+    // online: baseURL: 'http://www.ticketing-domain-prod-mariglianella.xyz/',
     return axios.create({
-      baseURL: 'http://www.ticketing-domain-prod-mariglianella.xyz/',
+      baseURL: process.env.CLIENT_BASE_URL,
       headers: req.headers,
     });
   } else {

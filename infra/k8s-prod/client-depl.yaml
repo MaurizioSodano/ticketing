@@ -15,7 +15,9 @@ spec:
             containers:
                 - name: client
                   image: masodano/client
-
+                  env:
+                      - name: CLIENT_BASE_URL
+                        value: "http://www.ticketing-domain-prod-mariglianella.xyz/"
 ---
 apiVersion: v1
 kind: Service
