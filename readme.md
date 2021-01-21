@@ -27,5 +27,17 @@ kubectl create secret generic **jwt-secret** --from-literal=**jwt**=asdf
 
 ... than
 5. kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v0.41.2/deploy/static/provider/cloud/deploy.yaml
+
+## Port 80 problem:
+To determine what might be using this port, run:
+
+macOS / Linux
+sudo lsof -i tcp:80
+
+Windows:
+netstat -aon | findstr :80
+
  # host
  create a record in hosts file: 127.0.0.1 ticketing.dev
+
+
