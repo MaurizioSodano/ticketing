@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { OrderStatus } from "@msticketingudemy/common"
+import { OrderStatus } from "@mauriziosodano/ticketing-common"
 import { TicketDoc } from "./ticket"
 export { OrderStatus };
 

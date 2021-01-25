@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import mongoose from "mongoose";
 import { body } from "express-validator";
-import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from "@msticketingudemy/common";
+import { BadRequestError, NotFoundError, OrderStatus, requireAuth, validateRequest } from "@mauriziosodano/ticketing-common";
 import { Ticket } from "../models/ticket";
 import { Order } from "../models/order";
 import { OrderCreatedPublisher } from "../events/publishers/order-created-publisher";

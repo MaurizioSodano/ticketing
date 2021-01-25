@@ -30,7 +30,7 @@ declare module "mongoose" {
     }
 }
 
-const ticketSchema = new mongoose.Schema({
+const ticketSchema = new mongoose.Schema<TicketDoc>({
     title: {
         type: String,
         required: true

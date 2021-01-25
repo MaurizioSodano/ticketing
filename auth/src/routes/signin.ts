@@ -3,7 +3,7 @@ import { body } from "express-validator";
 
 import { User } from "../models/user"
 
-import { validateRequest, BadRequestError } from "@msticketingudemy/common";
+import { validateRequest, BadRequestError } from "@mauriziosodano/ticketing-common";
 
 
 import { Password } from "../services/password";

@@ -1,5 +1,5 @@
 import { natsWrapper } from "../../../nats-wrapper";
-import { OrderCancelledEvent, OrderStatus } from "@msticketingudemy/common";
+import { OrderCancelledEvent, OrderStatus } from "@mauriziosodano/ticketing-common";
 import { OrderCancelledListener } from "../order-cancelled-listener";
 import mongoose from "mongoose";
 

@@ -1,4 +1,4 @@
-import { Listener, NotFoundError, OrderCancelledEvent, OrderStatus, Subjects } from "@msticketingudemy/common";
+import { Listener, NotFoundError, OrderCancelledEvent, OrderStatus, Subjects } from "@mauriziosodano/ticketing-common";
 import { Message } from "node-nats-streaming";
 import { Order } from "../../models/order";
 

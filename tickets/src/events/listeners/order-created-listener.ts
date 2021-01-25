@@ -1,4 +1,4 @@
-import { Listener, OrderCreatedEvent, Subjects } from "@msticketingudemy/common";
+import { Listener, OrderCreatedEvent, Subjects } from "@mauriziosodano/ticketing-common";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../models/ticket";
 import { TicketUpdatedPublisher } from "../publishers/ticket-updated-publisher";

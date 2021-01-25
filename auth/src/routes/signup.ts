@@ -2,7 +2,7 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
 
-import { validateRequest, BadRequestError } from "@msticketingudemy/common";
+import { validateRequest, BadRequestError } from "@mauriziosodano/ticketing-common";
 
 
 import { User } from "../models/user"

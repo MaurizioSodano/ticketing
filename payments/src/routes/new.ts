@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { BadRequestError, NotAuthorizedError, NotFoundError, OrderStatus, requireAuth, validateRequest } from "@msticketingudemy/common";
+import { BadRequestError, NotAuthorizedError, NotFoundError, OrderStatus, requireAuth, validateRequest } from "@mauriziosodano/ticketing-common";
 import { Order } from "../models/order";
 import { Payment } from "../models/payment";
 import { stripe } from "../stripe"

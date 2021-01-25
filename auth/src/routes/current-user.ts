@@ -1,5 +1,5 @@
 import express from "express";
-import { currentUser } from "@msticketingudemy/common";
+import { currentUser } from "@mauriziosodano/ticketing-common";
 
 
 const router = express.Router();

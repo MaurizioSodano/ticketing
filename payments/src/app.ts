@@ -2,7 +2,7 @@ import express from "express";
 import "express-async-errors";
 
 import { json } from "body-parser";
-import { errorHandler, NotFoundError, currentUser } from "@msticketingudemy/common";
+import { errorHandler, NotFoundError, currentUser } from "@mauriziosodano/ticketing-common";
 
 import cookieSession from "cookie-session";
 

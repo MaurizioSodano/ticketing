@@ -1,4 +1,4 @@
-import { Publisher, Subjects, OrderCancelledEvent } from "@msticketingudemy/common";
+import { Publisher, Subjects, OrderCancelledEvent } from "@mauriziosodano/ticketing-common";
 
 export class OrderCancelledPublisher extends Publisher<OrderCancelledEvent>{
     readonly subject = Subjects.OrderCancelled;
