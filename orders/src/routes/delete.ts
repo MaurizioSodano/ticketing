@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { Order, OrderStatus } from "../models/order"
-import { NotAuthorizedError, NotFoundError, requireAuth } from "@msticketingudemy/common";
+import { NotAuthorizedError, NotFoundError, requireAuth } from "@mauriziosodano/ticketing-common";
 import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import { natsWrapper } from "../nats-wrapper"
 

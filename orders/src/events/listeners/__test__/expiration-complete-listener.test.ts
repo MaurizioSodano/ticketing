@@ -1,6 +1,6 @@
 import { ExpirationCompleteListener } from "../expiration-complete-listener"
 import { natsWrapper } from "../../../nats-wrapper";
-import { ExpirationCompleteEvent, OrderStatus } from "@msticketingudemy/common";
+import { ExpirationCompleteEvent, OrderStatus } from "@mauriziosodano/ticketing-common";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../models/ticket";

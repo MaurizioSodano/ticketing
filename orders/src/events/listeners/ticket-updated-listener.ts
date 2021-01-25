@@ -1,5 +1,5 @@
 import { Message } from "node-nats-streaming";
-import { Subjects, Listener, TicketUpdatedEvent, NotFoundError } from "@msticketingudemy/common";
+import { Subjects, Listener, TicketUpdatedEvent, NotFoundError } from "@mauriziosodano/ticketing-common";
 import { Ticket } from "../../models/ticket";
 import { queueGroupName } from "./queue-group-name";
 

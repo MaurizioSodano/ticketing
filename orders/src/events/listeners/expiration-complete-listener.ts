@@ -1,4 +1,4 @@
-import { Subjects, Listener, ExpirationCompleteEvent, NotFoundError, OrderStatus } from "@msticketingudemy/common";
+import { Subjects, Listener, ExpirationCompleteEvent, NotFoundError, OrderStatus } from "@mauriziosodano/ticketing-common";
 import { Message } from "node-nats-streaming";
 import { queueGroupName } from "./queue-group-name";
 import { Order } from "../../models/order";

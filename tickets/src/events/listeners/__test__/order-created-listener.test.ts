@@ -1,5 +1,5 @@
 import { natsWrapper } from "../../../nats-wrapper";
-import { OrderCreatedEvent, OrderStatus } from "@msticketingudemy/common";
+import { OrderCreatedEvent, OrderStatus } from "@mauriziosodano/ticketing-common";
 import { OrderCreatedListener } from "../order-created-listener";
 import mongoose from "mongoose";
 

@@ -1,5 +1,5 @@
 import { Message } from "node-nats-streaming";
-import { Subjects, Listener, PaymentCreatedEvent, NotFoundError, OrderStatus } from "@msticketingudemy/common";
+import { Subjects, Listener, PaymentCreatedEvent, NotFoundError, OrderStatus } from "@mauriziosodano/ticketing-common";
 import { Order } from "../../models/order";
 import { queueGroupName } from "./queue-group-name";
 

@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { requireAuth } from "@msticketingudemy/common";
+import { requireAuth } from "@mauriziosodano/ticketing-common";
 import { Order } from "../models/order";
 
 const router = express.Router();

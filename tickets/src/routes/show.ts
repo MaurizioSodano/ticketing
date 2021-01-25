@@ -1,5 +1,5 @@
 import express, { Request, Response } from "express";
-import { NotFoundError } from "@msticketingudemy/common";
+import { NotFoundError } from "@mauriziosodano/ticketing-common";
 import { Ticket } from "../models/ticket";
 
 

@@ -1,6 +1,6 @@
 import { TicketUpdatedListener } from "../ticket-updated-listener"
 import { natsWrapper } from "../../../nats-wrapper";
-import { TicketUpdatedEvent } from "@msticketingudemy/common";
+import { TicketUpdatedEvent } from "@mauriziosodano/ticketing-common";
 import mongoose from "mongoose";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../models/ticket";
